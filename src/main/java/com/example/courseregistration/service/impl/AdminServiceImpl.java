@@ -24,7 +24,7 @@ public class AdminServiceImpl implements AdminService {
                 .adminEmail(adminDto.getAdminEmail())
                 .build();
         List<Admin> neededAdmin = getAdminByEmail(adminDto.getAdminEmail());
-        if(neededAdmin.size() == 0) {
+        if(neededAdmin.isEmpty()) {
             adminRepository.save(admin);
             return new ResponseDTO(200, "Success", "Admin has been registered");
         } else {
@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseDTO deleteAdmin(String adminEmail) {
         List<Admin> adminList = getAdminByEmail(adminEmail);
-        if(adminList.size() == 0) {
+        if(adminList.isEmpty()) {
             return new ResponseDTO(HttpStatus.NOT_FOUND.value(), "Not found", "Admin does not exists");
         } else {
             adminRepository.delete(adminList.get(0));
@@ -46,7 +46,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseDTO updateAdminPassword(String adminPassword, String adminEmail) {
         List<Admin> adminList = getAdminByEmail(adminEmail);
-        if(adminList.size() == 0) {
+        if(adminList.isEmpty()) {
             return new ResponseDTO(HttpStatus.NOT_FOUND.value(), "Not found", "Admin does not exists");
         } else {
             Admin admin = Admin.builder()
@@ -63,7 +63,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseDTO updateAdminUserName(String adminUserName, String adminEmail) {
         List<Admin> adminList = getAdminByEmail(adminEmail);
-        if(adminList.size() == 0) {
+        if(adminList.isEmpty()) {
             return new ResponseDTO(HttpStatus.NOT_FOUND.value(), "Not found", "Admin does not exists");
         } else {
             Admin admin = Admin.builder()
